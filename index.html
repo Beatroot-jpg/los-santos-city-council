@@ -1,0 +1,1728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Los Santos City Council - L.S.C.C</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #1a4d7a;
+            --secondary-color: #2c6ba8;
+            --accent-color: #d4af37;
+            --text-light: #ffffff;
+            --text-dark: #333333;
+            --bg-light: #f5f5f5;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Animated Background */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 20s infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); opacity: 0; }
+            10% { opacity: 0.3; }
+            90% { opacity: 0.3; }
+            100% { transform: translateY(-100vh) translateX(100px); opacity: 0; }
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 20px 0;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 3px solid var(--accent-color);
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            animation: slideInLeft 0.8s ease;
+        }
+
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .logo {
+            height: 80px;
+            width: auto;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+            transition: transform 0.3s ease, filter 0.3s ease;
+            cursor: pointer;
+        }
+
+        .logo:hover {
+            transform: scale(1.1);
+            filter: drop-shadow(0 8px 16px rgba(212, 175, 55, 0.4));
+        }
+
+        .title-section h1 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary-color);
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        .title-section p {
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+            font-style: italic;
+            font-weight: 500;
+        }
+
+        nav {
+            background: white;
+            border-radius: 3px;
+            padding: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            animation: slideInRight 0.8s ease;
+        }
+
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .tab-buttons {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 12px 24px;
+            border: none;
+            background: transparent;
+            color: var(--text-dark);
+            cursor: pointer;
+            border-radius: 3px;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .tab-btn::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 3px;
+            background: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        .tab-btn:hover {
+            background: var(--bg-light);
+            transform: translateY(-2px);
+        }
+
+        .tab-btn:hover::before {
+            width: 70%;
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--text-light);
+            box-shadow: 0 4px 15px rgba(26, 77, 122, 0.4);
+        }
+
+        .tab-btn.active::before {
+            width: 0;
+        }
+
+        main {
+            margin-top: 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .content-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 3px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .content-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.4);
+        }
+
+        .content-card h2 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            border-bottom: 3px solid var(--accent-color);
+            padding-bottom: 15px;
+            position: relative;
+        }
+
+        .content-card h2::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 100px;
+            height: 3px;
+            background: var(--secondary-color);
+        }
+
+        .content-card h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--secondary-color);
+            font-size: 1.5rem;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .content-card h3::before {
+            content: '■';
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+            font-size: 1rem;
+        }
+
+        .content-card p {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            text-align: justify;
+            line-height: 1.8;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(26, 77, 122, 0.1), rgba(44, 107, 168, 0.1));
+            border-left: 5px solid var(--accent-color);
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .highlight-box:hover {
+            transform: translateX(10px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, var(--bg-light), #ffffff);
+            padding: 30px;
+            border-radius: 0;
+            border-top: 4px solid var(--accent-color);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .feature-card:hover::before {
+            left: 100%;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            border-top-color: var(--secondary-color);
+        }
+
+        .feature-card h4 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        ul li {
+            margin-bottom: 10px;
+            font-size: 1.05rem;
+        }
+
+        /* Stats Counter */
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .stat-box {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            padding: 30px;
+            border-radius: 0;
+            text-align: center;
+            color: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid var(--accent-color);
+        }
+
+        .stat-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--accent-color);
+            font-family: 'Playfair Display', serif;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            margin-top: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Accordion */
+        .accordion-item {
+            background: rgba(255, 255, 255, 0.5);
+            margin: 15px 0;
+            border-radius: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 2px solid var(--primary-color);
+        }
+
+        .accordion-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .accordion-header:hover {
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+        }
+
+        .accordion-icon {
+            transition: transform 0.3s ease;
+            font-size: 1.5rem;
+        }
+
+        .accordion-item.active .accordion-icon {
+            transform: rotate(180deg);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            padding: 0 20px;
+            background: white;
+        }
+
+        .accordion-item.active .accordion-content {
+            max-height: 1000px;
+            padding: 20px;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            margin: 20px 0;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 30px;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 0;
+            overflow: hidden;
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+            border: 2px solid var(--primary-color);
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            border-radius: 0;
+            transition: width 1.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 10px;
+            color: white;
+            font-weight: 700;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--primary-color), var(--accent-color));
+        }
+
+        .timeline-item {
+            margin: 30px 0;
+            position: relative;
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 20px;
+            border-radius: 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            width: 45%;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid var(--primary-color);
+        }
+
+        .timeline-content:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border-color: var(--accent-color);
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-left: 0;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-left: 55%;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background: var(--accent-color);
+            border-radius: 0;
+            border: 4px solid white;
+            box-shadow: 0 0 0 4px var(--primary-color);
+            z-index: 1;
+        }
+
+        footer {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px 0;
+            margin-top: 50px;
+            text-align: center;
+            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 1;
+        }
+
+        footer p {
+            color: var(--text-dark);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .title-section h1 {
+                font-size: 1.5rem;
+            }
+
+            .tab-buttons {
+                justify-content: center;
+            }
+
+            .content-card {
+                padding: 20px;
+            }
+
+            .content-card h2 {
+                font-size: 1.8rem;
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item:nth-child(odd) .timeline-content,
+            .timeline-item:nth-child(even) .timeline-content {
+                width: calc(100% - 60px);
+                margin-left: 60px;
+            }
+
+            .timeline-dot {
+                left: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background Particles -->
+    <div class="particles" id="particles"></div>
+
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-section">
+                    <img src="City of los santos.png" alt="Los Santos City Council Logo" class="logo">
+                    <div class="title-section">
+                        <h1>Los Santos City Council</h1>
+                        <p>L.S.C.C - Serving the Community with Integrity</p>
+                    </div>
+                </div>
+                <nav>
+                    <div class="tab-buttons">
+                        <button class="tab-btn active" onclick="openTab(event, 'home')">Home</button>
+                        <button class="tab-btn" onclick="openTab(event, 'ideology')">Ideology & Thought Process</button>
+                        <button class="tab-btn" onclick="openTab(event, 'council')">Los Santos City Council</button>
+                        <button class="tab-btn" onclick="openTab(event, 'examples')">Good Roleplay Examples</button>
+                        <button class="tab-btn" onclick="openTab(event, 'mlo')">MLO</button>
+                        <button class="tab-btn" onclick="openTab(event, 'development')">Development</button>
+                        <button class="tab-btn" onclick="openTab(event, 'focus')">Initial RP Focus</button>
+                        <button class="tab-btn" onclick="openTab(event, 'potential')">Potential</button>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Home Tab -->
+        <div id="home" class="tab-content active">
+            <div class="content-card">
+                <h2>Welcome to the Los Santos City Council</h2>
+                <p>
+                    In the heart of San Andreas lies Los Santos, a sprawling metropolis of opportunity, diversity, and endless potential.
+                    Behind the glittering skyline and bustling streets stands the Los Santos City Council (L.S.C.C), the dedicated governing
+                    body committed to shaping the future of our great city.
+                </p>
+
+                <div class="highlight-box">
+                    <h3>Our Story</h3>
+                    <p>
+                        Born from the need for structured governance and community representation, the L.S.C.C was established to bridge
+                        the gap between the citizens of Los Santos and the administration that serves them. We are not just politicians;
+                        we are your neighbors, your advocates, and your voice in the halls of power.
+                    </p>
+                </div>
+
+                <!-- Stats Counter -->
+                <div class="stats-container">
+                    <div class="stat-box">
+                        <div class="stat-number" data-target="15">0</div>
+                        <div class="stat-label">Council Members</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number" data-target="50">0</div>
+                        <div class="stat-label">Active Projects</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number" data-target="1000">0</div>
+                        <div class="stat-label">Citizens Served</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number" data-target="100">0</div>
+                        <div class="stat-label">% Commitment</div>
+                    </div>
+                </div>
+
+                <h3>Who We Are</h3>
+                <p>
+                    The Los Santos City Council is composed of dedicated public servants who have taken an oath to serve the people of
+                    this great city. From the sun-soaked beaches of Vespucci to the towering skyscrapers of Pillbox Hill, from the
+                    industrial heartland of Cypress Flats to the affluent neighborhoods of Rockford Hills, we represent every corner
+                    of Los Santos.
+                </p>
+
+                <div class="grid-2">
+                    <div class="feature-card">
+                        <h4>🏛️ Democratic Governance</h4>
+                        <p>We believe in transparent, accountable leadership that puts citizens first.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🤝 Community Focused</h4>
+                        <p>Every decision we make is guided by the needs and voices of Los Santos residents.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>⚖️ Justice & Equality</h4>
+                        <p>We strive to create a fair and equitable city for all who call Los Santos home.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🌟 Innovation & Progress</h4>
+                        <p>We embrace forward-thinking solutions to build a better tomorrow.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ideology & Thought Process Tab -->
+        <div id="ideology" class="tab-content">
+            <div class="content-card">
+                <h2>Ideology & Thought Process</h2>
+
+                <div class="highlight-box">
+                    <h3>A New Approach to Roleplay</h3>
+                    <p>
+                        For the longest time, the AU/OCE FiveM scene has taken a significant hit in terms of RP standards.
+                        We've witnessed a wave of negative communities and personalities come and go for all the wrong reasons.
+                        Now, I'm not saying I'm perfect; however, I know how to keep it civil whilst also highlighting important issues.
+                    </p>
+                </div>
+
+                <h3>Our Core Philosophy</h3>
+                <p>
+                    The idea behind this role in the city is to provide a unique approach to roleplay. We aim to challenge people
+                    to use their brains as opposed to resorting to violence. Our goal is to challenge players mentally through
+                    in-game systems and custom scripts, keeping them thinking rather than just acting on impulse.
+                </p>
+
+                <h3>What Makes Us Different</h3>
+                <div class="grid-2">
+                    <div class="feature-card">
+                        <h4>🧠 Mental Challenges Over Violence</h4>
+                        <p>We encourage players to think critically and solve problems through dialogue, negotiation, and strategic planning rather than defaulting to aggressive confrontation.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>⚖️ Meaningful Governance</h4>
+                        <p>Our council provides real consequences and interactions that matter, creating a more immersive and realistic city environment.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🔧 Custom Systems & Scripts</h4>
+                        <p>We utilize innovative in-game mechanics and custom scripts to create engaging scenarios that require thought and planning.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>📋 Realistic City Operations</h4>
+                        <p>From building inspections to parking enforcement, we bring authentic municipal operations to life in Los Santos.</p>
+                    </div>
+                </div>
+
+                <h3>Our Approach in Action</h3>
+                <ul>
+                    <li><strong>Building Inspections:</strong> Conduct thorough inspections of properties and businesses to ensure compliance with city codes and safety regulations.</li>
+                    <li><strong>Vehicle Enforcement:</strong> Clamp vehicles for incorrect parking, creating real consequences for traffic violations and promoting orderly city streets.</li>
+                    <li><strong>Legislative Development:</strong> Work on providing simple yet interesting laws for people to abide by in-city, creating a structured and immersive environment.</li>
+                    <li><strong>Community Engagement:</strong> Foster dialogue between citizens and government, encouraging roleplay scenarios that don't rely on violence.</li>
+                    <li><strong>Problem-Solving Scenarios:</strong> Create situations where players must navigate bureaucracy, negotiate permits, and work within the system.</li>
+                </ul>
+
+                <div class="highlight-box">
+                    <h3>Raising the Standard</h3>
+                    <p>
+                        We're committed to elevating the roleplay experience in the AU/OCE FiveM community. By introducing
+                        thoughtful, engaging, and non-violent roleplay opportunities, we aim to set a new standard for what
+                        quality roleplay can be. This isn't about being perfect—it's about being better, together.
+                    </p>
+                </div>
+
+                <h3>The Vision</h3>
+                <p>
+                    The Los Santos City Council represents a shift away from the tired patterns that have plagued our community.
+                    We're building something different: a roleplay experience that rewards intelligence, creativity, and
+                    collaboration. Where your words carry as much weight as your actions, and where the pen truly is mightier
+                    than the sword.
+                </p>
+            </div>
+        </div>
+
+        <!-- Los Santos City Council Tab -->
+        <div id="council" class="tab-content">
+            <div class="content-card">
+                <h2>Los Santos City Council</h2>
+
+                <p>
+                    The Los Santos City Council is a role that caters to all council-based activities, creating a unique roleplay
+                    experience with the ability to cover a vast amount of formal ground. From the mundane to the monumental,
+                    the council touches every aspect of city life.
+                </p>
+
+                <div class="highlight-box">
+                    <h3>A Versatile Roleplay Experience</h3>
+                    <p>
+                        This role houses as much or as little power and responsibility as you really want to allow. It can be
+                        consistently developing or working on something new, creating an ongoing loop of RP and content that
+                        never grows stale.
+                    </p>
+                </div>
+
+                <h3>Council Responsibilities & Activities</h3>
+                <p>
+                    The scope of the Los Santos City Council is intentionally broad, allowing for diverse and engaging roleplay
+                    scenarios across multiple domains:
+                </p>
+
+                <!-- Accordion for Council Activities -->
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>🏛️ Legislative Functions</span>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p><strong>Formulating & Proposing Local Laws:</strong> Draft, debate, and implement city ordinances that shape how Los Santos operates. Create meaningful legislation that impacts daily life and provides roleplay opportunities for all citizens.</p>
+                        <p><strong>Policy Development:</strong> Establish guidelines and regulations that govern everything from business operations to public conduct.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>🏢 Business & Development Management</span>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p><strong>Managing Incoming Businesses:</strong> Review and approve new business applications, ensuring they meet city standards and contribute positively to the community.</p>
+                        <p><strong>Approving Developments:</strong> Oversee construction projects, zoning requests, and urban development initiatives that shape the physical landscape of Los Santos.</p>
+                        <p><strong>Business Licensing:</strong> Handle permits, licenses, and regulatory compliance for all commercial operations.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>👥 Community Engagement</span>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p><strong>Hosting City Meetings:</strong> Organize and conduct public forums, town halls, and council sessions where citizens can voice concerns and participate in governance.</p>
+                        <p><strong>Customer Enquiries:</strong> Address citizen questions, complaints, and requests, providing a direct line of communication between government and the people.</p>
+                        <p><strong>Public Relations:</strong> Maintain transparency and build trust through regular communication and community outreach.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>🛠️ Municipal Operations</span>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p><strong>Public Maintenance:</strong> Oversee essential city services like mowing public lawns, maintaining parks, and ensuring public spaces remain clean and accessible.</p>
+                        <p><strong>Infrastructure Management:</strong> Coordinate repairs, improvements, and maintenance of city facilities and public works.</p>
+                        <p><strong>Resource Allocation:</strong> Manage city budgets and allocate resources to various departments and projects.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>⚖️ Enforcement & Compliance</span>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p><strong>Code Enforcement:</strong> Ensure compliance with city codes, building regulations, and safety standards through inspections and enforcement actions.</p>
+                        <p><strong>Parking & Traffic Management:</strong> Implement and enforce parking regulations, traffic laws, and vehicle compliance measures.</p>
+                        <p><strong>Regulatory Oversight:</strong> Monitor businesses and properties to ensure adherence to local laws and regulations.</p>
+                    </div>
+                </div>
+
+                <h3>The Power of Flexibility</h3>
+                <div class="grid-2">
+                    <div class="feature-card">
+                        <h4>📊 Scalable Authority</h4>
+                        <p>The council's power can be tailored to fit your server's needs—from advisory roles to full executive authority.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🔄 Continuous Content</h4>
+                        <p>An ongoing loop of RP opportunities ensures there's always something new to work on or develop.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🎭 Diverse Scenarios</h4>
+                        <p>From mundane administrative tasks to high-stakes legislative debates, the variety keeps roleplay fresh and engaging.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🤝 Cross-Department Interaction</h4>
+                        <p>Work alongside police, EMS, businesses, and citizens, creating interconnected roleplay experiences.</p>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <h3>Endless Possibilities</h3>
+                    <p>
+                        The beauty of the Los Santos City Council lies in its versatility. Whether you're conducting a routine
+                        building inspection, negotiating a major development deal, or hosting a heated town hall meeting, every
+                        day brings new challenges and opportunities. This role is what you make of it—limited only by your
+                        creativity and ambition.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Good Roleplay Examples Tab -->
+        <div id="examples" class="tab-content">
+            <div class="content-card">
+                <h2>Good Roleplay Examples</h2>
+
+                <p>
+                    The following scenarios demonstrate how the Los Santos City Council creates engaging, thought-provoking
+                    roleplay opportunities that challenge players to think beyond violence and engage with the city's systems
+                    in meaningful ways.
+                </p>
+
+                <h3>Scenario 1: Parking Enforcement & Consequences</h3>
+                <div class="highlight-box">
+                    <h4>The Situation</h4>
+                    <p>
+                        Tim decides he wants to visit a clothing store. He hops in his supercar and flies down to Strawberry Avenue
+                        Clothing Store. Instead of parking in the designated car park, he parks in front of the hydrant, half on
+                        the curb and half on the road. He proceeds into the store.
+                    </p>
+                    <p>
+                        Two councilmen on patrol spot the car and decide it's not complying with a local law they just passed via
+                        a judge. They proceed to put a wheel clamp on Tim's car and await his arrival to conduct some RP with him.
+                    </p>
+                </div>
+
+                <h4>The Interaction</h4>
+                <p>
+                    Tim approaches the councilmen and asks what the hell is going on. The councilmen proceed to educate Tim on
+                    the local law. Tim tells them to get the clamp off or he's going to shoot them in the face. They exclaim
+                    that he needs to calm down or they'll call the police. The only way to have the clamp removed is to pay the
+                    small citation fee (something minute like $2,500—small but enough to make them think).
+                </p>
+
+                <h4>The Decision</h4>
+                <p>
+                    Tim has to stop and think about it. If he shoots them now, he ain't getting the wheel clamp off. Or he can
+                    try to talk his way out of it and use his head as opposed to violence for a change. He decides to pay, so
+                    the councilmen take the clamp off and walk away. Tim proceeds to shoot them both in the back of the head.
+                </p>
+
+                <div class="highlight-box">
+                    <h4>✅ Conclusion</h4>
+                    <p>
+                        <strong>Councilmen:</strong> Happy they did their job and got a laugh out of it.<br>
+                        <strong>Tim:</strong> Happy he got to shoot the smug bastards in the back of the head, and he used a
+                        different part of his brain.<br><br>
+                        <em>Everyone wins—the RP happened, consequences were considered, and the interaction was memorable.</em>
+                    </p>
+                </div>
+
+                <h3>Scenario 2: Legislative Process & Community Involvement</h3>
+                <div class="highlight-box">
+                    <h4>The Proposal</h4>
+                    <p>
+                        L.S.C.C decides they want to impose a new set of laws. They formulate their ideas and compile a proposal
+                        to take to the court for approval. They require the input of the police as it regards impounding vehicles
+                        and need insight on current procedures so they don't impose or make the standard harder for them.
+                    </p>
+                </div>
+
+                <h4>Cross-Department Collaboration</h4>
+                <p>
+                    They head down and request a meeting with Station Sergeant Tim to discuss the law. The SGT gives his opinion
+                    and seeks small amendments before it is proposed. The councilmen make the amendments and call a lawyer. They
+                    discuss the proposal with the lawyer and request a court date with Judge John to have the law approved or denied.
+                </p>
+
+                <h4>Public Court Process</h4>
+                <p>
+                    Court is public, and people are advised via the court case channel in the Discord. People can attend and view
+                    the law being implemented. Judge makes an unbiased decision and passes the law as legal. It's then posted in
+                    the IC-Announcements channel in Discord.
+                </p>
+
+                <h4>Community Response</h4>
+                <p>
+                    Tim sees this and is not happy with the law. He calls the city council and requests a town meeting so that it
+                    can be changed. Councilmen agree to a date and time and announce a city hall meeting where people can express
+                    their concerns. They then take the information to the lawyer and request another court case, and so on and so forth.
+                </p>
+
+                <div class="highlight-box">
+                    <h4>✅ Conclusion</h4>
+                    <p>
+                        Everyone gets to be involved in the scenario and can make an impact via following the correct procedures
+                        and actually thinking about how they can make a proper change. Makes for a smarter community.
+                    </p>
+                    <ul style="margin-top: 15px;">
+                        <li><strong>Police:</strong> Consulted and involved in the process</li>
+                        <li><strong>Lawyers:</strong> Engaged in legal proceedings</li>
+                        <li><strong>Judges:</strong> Make meaningful decisions</li>
+                        <li><strong>Citizens:</strong> Have a voice and can effect change</li>
+                        <li><strong>Council:</strong> Facilitates democratic process</li>
+                    </ul>
+                </div>
+
+                <h3>Key Takeaways</h3>
+                <div class="grid-2">
+                    <div class="feature-card">
+                        <h4>🧠 Encourages Critical Thinking</h4>
+                        <p>Players must weigh consequences and consider alternatives to immediate violence, creating more nuanced interactions.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🤝 Multi-Department Engagement</h4>
+                        <p>Council activities naturally involve police, lawyers, judges, and citizens, creating interconnected roleplay webs.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>⚖️ Meaningful Consequences</h4>
+                        <p>Actions have real in-game impacts that players must navigate, making the world feel more alive and responsive.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🗳️ Democratic Participation</h4>
+                        <p>Citizens can challenge laws and participate in governance, giving everyone agency in shaping the city.</p>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <h3>The Result: Elevated Roleplay</h3>
+                    <p>
+                        These scenarios demonstrate how the Los Santos City Council creates layers of interaction that go beyond
+                        simple confrontations. Even when violence occurs, it happens after meaningful roleplay and decision-making.
+                        The council serves as a catalyst for smarter, more engaging community interactions that benefit everyone involved.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- MLO Tab -->
+        <div id="mlo" class="tab-content">
+            <div class="content-card">
+                <h2>MLO</h2>
+
+                <p>
+                    We currently have a dedicated MLO (Map Load Object) for the Los Santos City Council, providing a professional
+                    and immersive headquarters for all council operations.
+                </p>
+
+                <div class="highlight-box">
+                    <h3>Office in Vinewood</h3>
+                    <p>
+                        Our council headquarters is located in Vinewood, featuring a fully functional office space designed
+                        specifically for government operations and citizen interactions.
+                    </p>
+                    <p style="margin-top: 15px;">
+                        <strong>Source:</strong> <a href="https://fivemx.com/office-in-vinewood-mlo/" target="_blank" style="color: var(--accent-color); text-decoration: none; font-weight: 600;">Office in Vinewood MLO - FiveMX</a>
+                    </p>
+                </div>
+
+                <h3>Customization & Testing</h3>
+                <div class="grid-2">
+                    <div class="feature-card">
+                        <h4>🎨 Custom Branding</h4>
+                        <p>We've embedded our official Los Santos City Council logo directly into the textures, creating an authentic and professional government atmosphere.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🔧 Thoroughly Tested</h4>
+                        <p>The MLO has undergone extensive bug testing in our development server to ensure stability and optimal performance.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>✅ Production Ready</h4>
+                        <p>The MLO works flawlessly in our development environment and is ready for deployment to live servers.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🏛️ Professional Environment</h4>
+                        <p>The office space provides dedicated areas for meetings, citizen services, administrative work, and council operations.</p>
+                    </div>
+                </div>
+
+                <h3>Features & Functionality</h3>
+                <ul>
+                    <li><strong>Meeting Rooms:</strong> Dedicated spaces for hosting town halls, council sessions, and private consultations.</li>
+                    <li><strong>Administrative Offices:</strong> Professional workspaces for councilmen to conduct daily operations and paperwork.</li>
+                    <li><strong>Public Service Area:</strong> Reception and service desks where citizens can submit enquiries and applications.</li>
+                    <li><strong>Custom Textures:</strong> L.S.C.C branding integrated throughout the building for authentic immersion.</li>
+                    <li><strong>Optimized Performance:</strong> Tested and verified to run smoothly without impacting server performance.</li>
+                </ul>
+
+                <div class="highlight-box">
+                    <h3>A Home for Governance</h3>
+                    <p>
+                        Having a dedicated physical location elevates the roleplay experience significantly. Citizens know where
+                        to find us, councilmen have a professional base of operations, and the presence of an official government
+                        building adds legitimacy and immersion to all council activities. This isn't just an office—it's the
+                        heart of Los Santos governance.
+                    </p>
+                </div>
+
+                <h3>Development Status</h3>
+                <div class="progress-container">
+                    <div class="progress-label">
+                        <span>MLO Integration</span>
+                        <span>100%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 0%" data-width="100%"></div>
+                    </div>
+                </div>
+
+                <div class="progress-container">
+                    <div class="progress-label">
+                        <span>Custom Branding</span>
+                        <span>100%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 0%" data-width="100%"></div>
+                    </div>
+                </div>
+
+                <div class="progress-container">
+                    <div class="progress-label">
+                        <span>Bug Testing</span>
+                        <span>100%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 0%" data-width="100%"></div>
+                    </div>
+                </div>
+
+                <div class="progress-container">
+                    <div class="progress-label">
+                        <span>Production Readiness</span>
+                        <span>100%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 0%" data-width="100%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Development Tab -->
+        <div id="development" class="tab-content">
+            <div class="content-card">
+                <h2>Development</h2>
+
+                <p>
+                    We're currently working on a lot of the development ourselves and would require a few things from your end
+                    to commence our journey. Below is a comprehensive list of the essential systems and features needed to bring
+                    the Los Santos City Council to life.
+                </p>
+
+                <h3>Required Systems & Features</h3>
+                <p>
+                    The following components are necessary for the council to operate effectively and provide the full range
+                    of roleplay opportunities we envision:
+                </p>
+
+                <!-- Accordion for Development Requirements -->
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>💼 The Job Itself</span>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p><strong>Core Job Framework:</strong> Implementation of the Los Santos City Council as an official job within the server framework, including job assignment, permissions, and role identification.</p>
+                        <p><strong>Job Hierarchy:</strong> Support for different council positions and ranks (e.g., Councilman, Senior Councilman, Council Director).</p>
+                        <p><strong>Duty System:</strong> Ability to go on/off duty with appropriate job-specific features activating when on duty.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>📞 Phone Directory Integration</span>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p><strong>Public Contact Number:</strong> Our numbers added to the in-game phone directory so citizens can easily contact the council for enquiries, complaints, and service requests.</p>
+                        <p><strong>Professional Listing:</strong> Official listing under government services for easy accessibility.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>🏢 MLO & Vehicle Integration</span>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p><strong>MLO Implementation:</strong> Our custom-branded Vinewood office MLO integrated into the server with proper spawn points and interaction zones.</p>
+                        <p><strong>Council Vehicles:</strong> In the future, addition of official council vehicles for patrols, inspections, and transportation.</p>
+                        <p><strong>Vehicle Liveries:</strong> Custom L.S.C.C branding on all official vehicles.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>💰 Invoicing System</span>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p><strong>The Ability to Invoice:</strong> Essential system allowing councilmen to issue invoices for fines, citations, permits, licenses, and other council services.</p>
+                        <p><strong>Payment Processing:</strong> Integration with the server's economy system for seamless payment collection.</p>
+                        <p><strong>Record Keeping:</strong> Tracking of issued invoices for accountability and administrative purposes.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>🚗 Impound & Towing Capabilities</span>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p><strong>The Ability to Impound:</strong> Permission and system access to impound vehicles that violate parking laws or city ordinances.</p>
+                        <p><strong>A Tow Truck:</strong> Dedicated tow truck vehicle for transporting impounded or illegally parked vehicles.</p>
+                        <p><strong>Impound Lot Integration:</strong> Connection to the city's impound system for vehicle storage and retrieval.</p>
+                        <p><strong>Wheel Clamp System:</strong> Ability to clamp vehicles as an alternative to immediate impounding.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>⚙️ Boss Menu</span>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p><strong>Management Interface:</strong> Boss menu for council leadership to manage employees, handle payroll, and oversee operations.</p>
+                        <p><strong>Hiring & Firing:</strong> Ability to recruit new councilmen and manage the roster.</p>
+                        <p><strong>Financial Management:</strong> Access to council funds, budgets, and financial records.</p>
+                        <p><strong>Grade Management:</strong> Promote or demote council members based on performance.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>🔒 Door Locks</span>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p><strong>Secure Access:</strong> Door lock system for the council MLO to ensure only authorized personnel can access restricted areas.</p>
+                        <p><strong>Public vs. Private Areas:</strong> Differentiation between public service areas and private administrative spaces.</p>
+                        <p><strong>Key Management:</strong> Proper key distribution to council members.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>🚙 Personal Garage @ MLO</span>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p><strong>Vehicle Storage:</strong> Dedicated garage at the MLO for storing council vehicles and personal vehicles while on duty.</p>
+                        <p><strong>Vehicle Spawning:</strong> Convenient access to official council vehicles directly from headquarters.</p>
+                        <p><strong>Secure Parking:</strong> Protected parking area for councilmen to safely store vehicles during work hours.</p>
+                    </div>
+                </div>
+
+                <h3>Development Checklist</h3>
+                <div class="grid-2">
+                    <div class="feature-card">
+                        <h4>✅ Self-Developed</h4>
+                        <p>MLO customization, branding, bug testing, and conceptual framework—all handled in-house.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🔧 Server Integration Required</h4>
+                        <p>Job framework, permissions, systems access, and server-side features need administrative implementation.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🤝 Collaborative Approach</h4>
+                        <p>We're doing our part; we just need your support to integrate these systems into the server infrastructure.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🚀 Ready to Launch</h4>
+                        <p>Once these requirements are met, the Los Santos City Council will be fully operational and ready to enhance the server's RP.</p>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <h3>Our Commitment</h3>
+                    <p>
+                        We're not asking for everything to be done for us. We've already invested significant time and effort
+                        into developing the concept, testing the MLO, creating branding, and planning the roleplay framework.
+                        These requirements are the essential server-side integrations needed to bring our vision to life. We're
+                        ready to work collaboratively to make the Los Santos City Council a valuable addition to the community.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Initial RP Focus Tab -->
+        <div id="focus" class="tab-content">
+            <div class="content-card">
+                <h2>Initial RP Focus</h2>
+
+                <p>
+                    Our initial roleplay focus will be centered on parking enforcement—a foundational aspect of city governance
+                    that creates immediate, tangible interactions with citizens while establishing the council's presence and authority.
+                </p>
+
+                <h3>Parking Law Framework</h3>
+                <div class="highlight-box">
+                    <h4>Proposed Parking Violations</h4>
+                    <p>
+                        We would script comprehensive laws regarding parking infractions, including but not limited to:
+                    </p>
+                    <ul style="margin-top: 10px;">
+                        <li><strong>Facing Toward Incoming Traffic:</strong> Vehicles parked against the flow of traffic</li>
+                        <li><strong>Parking on the Curb:</strong> Vehicles partially or fully mounted on sidewalks</li>
+                        <li><strong>Blocking a Driveway:</strong> Obstructing private or commercial property access</li>
+                        <li><strong>Blocking a Fire Hydrant:</strong> Parking within prohibited distance of emergency equipment</li>
+                        <li><strong>No Parking Zones:</strong> Violations of designated restricted areas</li>
+                        <li><strong>Handicap Zone Violations:</strong> Unauthorized parking in accessible spaces</li>
+                    </ul>
+                </div>
+
+                <h3>The Proper RP Route</h3>
+                <p>
+                    We wouldn't just start enforcing rules arbitrarily. We'd go down the proper RP route to have our idea come
+                    to fruition before conducting patrols and issuing citations:
+                </p>
+
+                <div class="grid-2">
+                    <div class="feature-card">
+                        <h4>1️⃣ Law Drafting</h4>
+                        <p>Formulate comprehensive parking ordinances with clear definitions and penalties.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>2️⃣ Stakeholder Consultation</h4>
+                        <p>Meet with police to ensure alignment with existing procedures and enforcement capabilities.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>3️⃣ Legal Review</h4>
+                        <p>Present proposals to lawyers and request a court date for judicial approval.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>4️⃣ Public Announcement</h4>
+                        <p>Once approved, announce the new laws through IC channels, giving citizens notice.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>5️⃣ Grace Period</h4>
+                        <p>Allow time for citizens to learn the new regulations before full enforcement begins.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>6️⃣ Active Enforcement</h4>
+                        <p>Begin patrols, issue citations, and engage in parking enforcement roleplay.</p>
+                    </div>
+                </div>
+
+                <h3>Custom Wheel Clamp Script</h3>
+                <div class="highlight-box">
+                    <h4>🔧 Fully Functional & Persistent</h4>
+                    <p>
+                        Not to mention, we've actually created a wheel clamp script that works and is persistent through restarts.
+                        This means once a vehicle is clamped, it stays clamped until properly removed—no exploits, no workarounds.
+                    </p>
+                </div>
+
+                <h4>How It Works</h4>
+                <ul>
+                    <li><strong>Persistent Clamping:</strong> Wheel clamps remain on vehicles even after server restarts, ensuring consequences can't be avoided.</li>
+                    <li><strong>Multi-Department Access:</strong> People will need to contact Police, EMS, or the Council to have clamps removed.</li>
+                    <li><strong>Payment Required:</strong> Clamps can only be removed after paying the associated citation fee.</li>
+                    <li><strong>Visual Indicator:</strong> Clear visual representation of the clamp on the vehicle.</li>
+                </ul>
+
+                <h3>Cross-Department Integration</h3>
+                <p>
+                    We want EMS and Police to have this item in their kit as well, so that it isn't just limited to us. This
+                    creates additional roleplay opportunities and practical applications:
+                </p>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>🚔 Police Department Usage</span>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p><strong>Pursuit Consequences:</strong> Maybe even having police get an SOP to clamp vehicles that are water-dumped during pursuits. This adds a realistic consequence to failed getaways.</p>
+                        <p><strong>Evidence Preservation:</strong> Clamp vehicles at crime scenes to prevent tampering or removal.</p>
+                        <p><strong>Hefty Fines:</strong> They can pay a hefty fine to have it removed, creating financial consequences for criminal activity.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>🚑 EMS Department Usage</span>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p><strong>Emergency Access:</strong> Clamp vehicles blocking ambulance bays or emergency access routes.</p>
+                        <p><strong>Scene Safety:</strong> Secure vehicles at accident scenes to prevent movement during medical operations.</p>
+                        <p><strong>Service Calls:</strong> Respond to clamp removal requests, creating additional RP interactions.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>🏛️ City Council Usage</span>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p><strong>Parking Enforcement:</strong> Primary use for parking violations and code enforcement.</p>
+                        <p><strong>Building Inspections:</strong> Clamp vehicles at properties under investigation or inspection.</p>
+                        <p><strong>Citation Collection:</strong> Ensure fines are paid before removing clamps.</p>
+                    </div>
+                </div>
+
+                <h3>Why Start with Parking?</h3>
+                <div class="grid-2">
+                    <div class="feature-card">
+                        <h4>✅ Immediate Impact</h4>
+                        <p>Parking violations are visible, common, and create instant roleplay opportunities throughout the city.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>✅ Low Barrier to Entry</h4>
+                        <p>Simple to understand and enforce, allowing the council to establish credibility quickly.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>✅ Non-Violent Interactions</h4>
+                        <p>Creates scenarios where players must think and negotiate rather than shoot first.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>✅ Foundation for Growth</h4>
+                        <p>Once parking enforcement is established, we can expand to building codes, business licenses, and more complex governance.</p>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <h3>Building From the Ground Up</h3>
+                    <p>
+                        Starting with parking enforcement allows us to establish the council's presence, test our systems, and
+                        create immediate value for the server. It's a practical, achievable goal that demonstrates our commitment
+                        to quality roleplay while laying the groundwork for more complex governmental operations in the future.
+                        Plus, with our custom wheel clamp script, we're bringing genuine innovation to the table.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Potential Tab -->
+        <div id="potential" class="tab-content">
+            <div class="content-card">
+                <h2>Potential</h2>
+
+                <p>
+                    The Los Santos City Council represents huge roleplay potential, not just for us but for the entire community.
+                    We're committed to showcasing what quality governance roleplay can look like and bringing value to the server
+                    in multiple ways.
+                </p>
+
+                <h3>Content Creation & Community Growth</h3>
+                <div class="highlight-box">
+                    <h4>📺 Streaming & Exposure</h4>
+                    <p>
+                        I'll be attempting to stream the RP when Feaks and I are conducting ourselves, aiming to get other
+                        like-minded people on board or interested in the city. This creates organic marketing and showcases
+                        the unique roleplay opportunities available on the server.
+                    </p>
+                </div>
+
+                <div class="grid-2">
+                    <div class="feature-card">
+                        <h4>🎥 Live Demonstrations</h4>
+                        <p>Streaming council activities provides real-time examples of quality roleplay, attracting players who value thoughtful interactions.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🌐 Community Building</h4>
+                        <p>Showcasing our work helps identify and recruit like-minded players who appreciate non-violent, cerebral roleplay.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>📈 Server Promotion</h4>
+                        <p>Quality content brings visibility to the server, potentially attracting new members and increasing engagement.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>💡 Inspiration</h4>
+                        <p>Demonstrating what's possible with council RP may inspire others to create their own unique roleplay scenarios.</p>
+                    </div>
+                </div>
+
+                <h3>Business Management Potential</h3>
+                <p>
+                    There is also potential for us to manage the business aspect of the city. We have the skills and dedication
+                    to take on additional responsibilities that benefit the entire server ecosystem.
+                </p>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>💻 Technical Development</span>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p><strong>Coding Capabilities:</strong> Feaks and I can code and could work on any mechanical requirements for businesses or server features.</p>
+                        <p><strong>Custom Scripts:</strong> We've already demonstrated this with our persistent wheel clamp script—we can create tailored solutions for business needs.</p>
+                        <p><strong>Bug Fixes & Optimization:</strong> Provide ongoing technical support for business-related systems and scripts.</p>
+                        <p><strong>Innovation:</strong> Develop new features and mechanics that enhance the business roleplay experience.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>📋 Administrative Management</span>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p><strong>Business Approvals:</strong> I could do the administration side of things, approving and assisting new businesses through the application process.</p>
+                        <p><strong>Application Review:</strong> Evaluate business proposals for viability, quality, and server fit.</p>
+                        <p><strong>Onboarding Support:</strong> Help new business owners get set up with everything they need to succeed.</p>
+                        <p><strong>Ongoing Assistance:</strong> Provide continued support for established businesses as they grow and evolve.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>🎭 Roleplay Integration</span>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p><strong>In-City Processing:</strong> It could all be done via RP in the city—business owners meet with the council, submit applications, attend hearings, etc.</p>
+                        <p><strong>Discord Coordination:</strong> Or handled through Discord for out-of-city administrative work and documentation.</p>
+                        <p><strong>Flexible Approach:</strong> Adapt the process to what works best for each business and situation.</p>
+                        <p><strong>Immersive Experience:</strong> Create realistic bureaucratic processes that add depth to the business ownership experience.</p>
+                    </div>
+                </div>
+
+                <h3>Let's Talk</h3>
+                <div class="highlight-box">
+                    <h4>☎️ Something to Touch Base Via a Voice Call</h4>
+                    <p>
+                        We're open to discussing how the Los Santos City Council can best serve the server and community. Whether
+                        it's about implementing the council, exploring business management opportunities, or brainstorming other
+                        ways we can contribute—let's have a conversation.
+                    </p>
+                    <p style="margin-top: 15px;">
+                        <strong>We're ready to:</strong>
+                    </p>
+                    <ul style="margin-top: 10px;">
+                        <li>Discuss integration requirements and timelines</li>
+                        <li>Explore additional responsibilities we can take on</li>
+                        <li>Share our vision and answer any questions</li>
+                        <li>Collaborate on making this a reality</li>
+                    </ul>
+                </div>
+
+                <h3>What We Bring to the Table</h3>
+                <div class="grid-2">
+                    <div class="feature-card">
+                        <h4>🧠 Vision & Planning</h4>
+                        <p>Comprehensive understanding of what quality governance roleplay looks like and how to implement it.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>💻 Technical Skills</h4>
+                        <p>Proven coding abilities with custom scripts already developed and tested.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>📊 Administrative Experience</h4>
+                        <p>Capability to handle business approvals, applications, and ongoing management.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🎯 Commitment</h4>
+                        <p>Dedication to creating quality content, streaming our work, and contributing to community growth.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🤝 Collaborative Mindset</h4>
+                        <p>Willingness to work with existing systems, departments, and server leadership.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🌟 Innovation</h4>
+                        <p>Fresh ideas and unique approaches to roleplay that elevate the entire server experience.</p>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <h3>The Bottom Line</h3>
+                    <p>
+                        The Los Santos City Council isn't just a job—it's an opportunity to transform how governance roleplay
+                        works in the AU/OCE FiveM scene. We're bringing technical skills, administrative capability, creative
+                        vision, and genuine passion to the table. We're not just asking for a spot on the server; we're offering
+                        to become valuable contributors who enhance the experience for everyone.
+                    </p>
+                    <p style="margin-top: 15px;">
+                        <strong>Let's build something great together.</strong>
+                    </p>
+                </div>
+
+                <!-- Stats showing potential impact -->
+                <h3>Potential Impact</h3>
+                <div class="stats-container">
+                    <div class="stat-box">
+                        <div class="stat-number" data-target="100">0</div>
+                        <div class="stat-label">% Commitment</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number" data-target="2">0</div>
+                        <div class="stat-label">Skilled Developers</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number" data-target="∞">0</div>
+                        <div class="stat-label">RP Possibilities</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number" data-target="1">0</div>
+                        <div class="stat-label">Unique Vision</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Los Santos City Council (L.S.C.C) | Serving the Community with Integrity</p>
+            <p>A FiveM Roleplay Initiative</p>
+        </div>
+    </footer>
+
+    <script>
+        // Tab Switching Function
+        function openTab(evt, tabName) {
+            // Hide all tab contents
+            const tabContents = document.getElementsByClassName('tab-content');
+            for (let i = 0; i < tabContents.length; i++) {
+                tabContents[i].classList.remove('active');
+            }
+
+            // Remove active class from all buttons
+            const tabButtons = document.getElementsByClassName('tab-btn');
+            for (let i = 0; i < tabButtons.length; i++) {
+                tabButtons[i].classList.remove('active');
+            }
+
+            // Show the selected tab and mark button as active
+            document.getElementById(tabName).classList.add('active');
+            evt.currentTarget.classList.add('active');
+
+            // Smooth scroll to top of content
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            // Trigger animations for the new tab
+            if (tabName === 'home') {
+                animateStats();
+            } else if (tabName === 'capabilities') {
+                animateProgressBars();
+            }
+        }
+
+        // Accordion Toggle Function
+        function toggleAccordion(header) {
+            const item = header.parentElement;
+            const wasActive = item.classList.contains('active');
+
+            // Close all accordion items
+            const allItems = document.querySelectorAll('.accordion-item');
+            allItems.forEach(i => i.classList.remove('active'));
+
+            // Open clicked item if it wasn't active
+            if (!wasActive) {
+                item.classList.add('active');
+            }
+        }
+
+        // Animated Counter for Stats
+        function animateStats() {
+            const stats = document.querySelectorAll('.stat-number');
+            stats.forEach(stat => {
+                const target = parseInt(stat.getAttribute('data-target'));
+                const duration = 2000; // 2 seconds
+                const increment = target / (duration / 16); // 60fps
+                let current = 0;
+
+                const updateCounter = () => {
+                    current += increment;
+                    if (current < target) {
+                        stat.textContent = Math.floor(current);
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        stat.textContent = target;
+                    }
+                };
+
+                stat.textContent = '0';
+                updateCounter();
+            });
+        }
+
+        // Animate Progress Bars
+        function animateProgressBars() {
+            const progressBars = document.querySelectorAll('.progress-fill');
+            progressBars.forEach(bar => {
+                const targetWidth = bar.getAttribute('data-width');
+                setTimeout(() => {
+                    bar.style.width = targetWidth;
+                }, 100);
+            });
+        }
+
+        // Create Animated Background Particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 30;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+
+                // Random size between 2px and 8px
+                const size = Math.random() * 6 + 2;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+
+                // Random horizontal position
+                particle.style.left = Math.random() * 100 + '%';
+
+                // Random animation delay
+                particle.style.animationDelay = Math.random() * 20 + 's';
+
+                // Random animation duration
+                particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Initialize on page load
+        window.addEventListener('load', () => {
+            createParticles();
+            animateStats();
+
+            // Observe when capabilities tab becomes visible
+            const capabilitiesTab = document.getElementById('capabilities');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && entry.target.classList.contains('active')) {
+                        animateProgressBars();
+                    }
+                });
+            });
+
+            if (capabilitiesTab) {
+                observer.observe(capabilitiesTab);
+            }
+        });
+
+        // Add smooth scroll behavior to all internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add hover effect sound (optional - can be enabled if desired)
+        const featureCards = document.querySelectorAll('.feature-card');
+        featureCards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transition = 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+            });
+        });
+
+        // Logo click easter egg
+        const logo = document.querySelector('.logo');
+        let clickCount = 0;
+        logo.addEventListener('click', () => {
+            clickCount++;
+            if (clickCount === 5) {
+                alert('🎉 Thank you for your interest in the Los Santos City Council! Together, we build a better future!');
+                clickCount = 0;
+            }
+        });
+    </script>
+</body>
+</html>
+
