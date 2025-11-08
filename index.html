@@ -226,6 +226,16 @@
             padding: 25px;
             text-align: center;
             border: 1px solid var(--border-color);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: block;
+            color: inherit;
+        }
+
+        .stat-box:hover {
+            background: var(--secondary-color);
+            border-color: var(--accent-color);
         }
 
         .stat-number {
@@ -470,30 +480,25 @@
                 <div class="highlight-box">
                     <h3>Our Story</h3>
                     <p>
-                        Born from the need for structured governance and community representation, the L.S.C.C was established to bridge
-                        the gap between the citizens of Los Santos and the administration that serves them. We are not just politicians;
-                        we are your neighbors, your advocates, and your voice in the halls of power.
+                        The Los Santos City Council was established to bridge the gap between law enforcement and the citizens of Los Santos,
+                        advocating for justice and peace, serving as a catalyst of change, hope, and inspiration for all to be involved.
+                        The elected councilmen and women of the LSCC are established community members who have political experience and
+                        strive for the continuous improvement of the city. They're there to help all who require it.
                     </p>
                 </div>
 
-                <!-- Stats Counter -->
+                <!-- Quick Stats - Linked to Sections -->
                 <div class="stats-container">
-                    <div class="stat-box">
-                        <div class="stat-number" data-target="15">0</div>
+                    <a href="#hierarchy" class="stat-box">
+                        <div class="stat-number" id="council-members-count">0</div>
                         <div class="stat-label">Council Members</div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="stat-number" data-target="50">0</div>
+                        <p style="font-size: 0.75rem; margin-top: 8px; opacity: 0.7;">Click to view hierarchy →</p>
+                    </a>
+                    <a href="#projects" class="stat-box">
+                        <div class="stat-number" id="active-projects-count">0</div>
                         <div class="stat-label">Active Projects</div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="stat-number" data-target="1000">0</div>
-                        <div class="stat-label">Citizens Served</div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="stat-number" data-target="100">0</div>
-                        <div class="stat-label">% Commitment</div>
-                    </div>
+                        <p style="font-size: 0.75rem; margin-top: 8px; opacity: 0.7;">Click to view projects →</p>
+                    </a>
                 </div>
 
                 <h3>Who We Are</h3>
@@ -529,7 +534,74 @@
         <section id="projects">
             <div class="content-card">
                 <h2>Current Projects</h2>
-                <p>[Content to be added]</p>
+                <p>
+                    The Los Santos City Council is actively working on several key initiatives to improve governance,
+                    transparency, and quality of life for all citizens. Below are our current operations in progress.
+                </p>
+
+                <!-- Project 1: Operation Monumental -->
+                <div class="feature-card" style="margin-top: 30px;">
+                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 15px;">
+                        <div>
+                            <h3 style="margin: 0; color: var(--accent-color);">Operation Monumental</h3>
+                            <p style="margin: 5px 0 0 0; font-size: 0.85rem; opacity: 0.8;">Federal Commission | Legislative Audit</p>
+                        </div>
+                        <span style="background: var(--accent-color); color: var(--primary-color); padding: 5px 12px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Active</span>
+                    </div>
+
+                    <p style="margin-top: 15px;">
+                        City Council is currently undergoing Operation Monumental, which is a federal commission into all current city laws.
+                        Once all current laws have been audited, councilmen will compile a comprehensive law list and publish it to the public
+                        via email and their social media platforms to ensure all civilians are aware of current and applicable laws.
+                    </p>
+
+                    <div class="highlight-box" style="margin-top: 15px;">
+                        <p style="margin: 0; font-size: 0.9rem;">
+                            <strong>📋 Objective:</strong> Complete audit of all city ordinances and legislation<br>
+                            <strong>📢 Outcome:</strong> Public distribution of comprehensive law documentation<br>
+                            <strong>⏱️ Timeline:</strong> In Progress
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Project 2: Operation Johnson -->
+                <div class="feature-card" style="margin-top: 25px;">
+                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 15px;">
+                        <div>
+                            <h3 style="margin: 0; color: var(--accent-color);">Operation Johnson</h3>
+                            <p style="margin: 5px 0 0 0; font-size: 0.85rem; opacity: 0.8;">State-Wide Parking | Legislative Development</p>
+                        </div>
+                        <span style="background: var(--accent-color); color: var(--primary-color); padding: 5px 12px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Active</span>
+                    </div>
+
+                    <p style="margin-top: 15px;">
+                        City Council is currently in the process of scripting parking laws to bring forward to other government bodies
+                        before having them approved via government ministers. This initiative aims to establish clear, enforceable parking
+                        regulations across Los Santos to improve traffic flow and public safety.
+                    </p>
+
+                    <div class="highlight-box" style="margin-top: 15px;">
+                        <p style="margin: 0; font-size: 0.9rem;">
+                            <strong>📋 Objective:</strong> Draft comprehensive state-wide parking legislation<br>
+                            <strong>🏛️ Next Steps:</strong> Presentation to government bodies for approval<br>
+                            <strong>⏱️ Timeline:</strong> Pending Ministerial Review
+                        </p>
+                    </div>
+
+                    <div style="margin-top: 15px; padding: 12px; background: var(--bg-dark); border-left: 3px solid var(--border-color);">
+                        <p style="margin: 0; font-size: 0.85rem; font-style: italic; opacity: 0.9;">
+                            <strong>Note:</strong> More information will be available as this operation progresses.
+                            Stay tuned to our official channels for updates.
+                        </p>
+                    </div>
+                </div>
+
+                <div style="margin-top: 30px; padding: 20px; background: var(--bg-light); border: 1px solid var(--border-color); text-align: center;">
+                    <p style="margin: 0; font-size: 0.95rem;">
+                        <strong>Have a project idea or concern?</strong> The City Council welcomes community input.
+                        <a href="#contact" style="color: var(--accent-color); text-decoration: none; font-weight: 600;">Contact us</a> to share your thoughts.
+                    </p>
+                </div>
             </div>
         </section>
 
@@ -545,7 +617,123 @@
         <section id="hierarchy">
             <div class="content-card">
                 <h2>Hierarchy</h2>
-                <p>[Content to be added]</p>
+                <p>
+                    The Los Santos City Council operates with a clear organizational structure designed to ensure efficient
+                    governance and responsive public service. Each role carries specific responsibilities that contribute to
+                    the overall mission of serving the citizens of Los Santos.
+                </p>
+
+                <!-- Rank 1: Councilmen/Woman -->
+                <div class="feature-card" style="margin-top: 30px; border-left: 4px solid var(--accent-color);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                        <h3 style="margin: 0; color: var(--accent-color); text-transform: uppercase; letter-spacing: 1px;">Councilmen/Woman</h3>
+                        <span style="background: var(--accent-color); color: var(--primary-color); padding: 4px 10px; font-size: 0.7rem; font-weight: 700;">RANK 1</span>
+                    </div>
+
+                    <p style="margin-top: 12px; line-height: 1.6;">
+                        Councilmen/women oversee City Council operations from day to day and advocate tasks for their subordinates.
+                        They provide strategic direction, make key decisions on legislative matters, and serve as the primary
+                        representatives of the council in official capacities.
+                    </p>
+
+                    <div style="margin-top: 15px; padding: 12px; background: var(--bg-dark); border-left: 3px solid var(--accent-color);">
+                        <p style="margin: 0; font-size: 0.85rem;">
+                            <strong>Key Responsibilities:</strong> Strategic oversight, task delegation, legislative leadership, official representation
+                        </p>
+                    </div>
+
+                    <!-- Current Councilmen/Women -->
+                    <div style="margin-top: 20px; padding: 15px; background: var(--bg-light); border: 1px solid var(--accent-color);">
+                        <p style="margin: 0 0 10px 0; font-size: 0.85rem; font-weight: 700; color: var(--accent-color); text-transform: uppercase; letter-spacing: 1px;">Current Members:</p>
+                        <ul style="margin: 0; padding-left: 20px; list-style: none;">
+                            <li class="hierarchy-member" style="padding: 8px 0; border-bottom: 1px solid var(--border-color);">
+                                <span style="color: var(--accent-color); font-weight: 600;">Councilman Tony Yugoslav</span>
+                            </li>
+                            <li class="hierarchy-member" style="padding: 8px 0;">
+                                <span style="color: var(--accent-color); font-weight: 600;">Councilman Roco Kesfataris</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Rank 2: Representative -->
+                <div class="feature-card" style="margin-top: 25px; border-left: 4px solid var(--text-dark);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                        <h3 style="margin: 0; color: var(--text-light); text-transform: uppercase; letter-spacing: 1px;">Representative</h3>
+                        <span style="background: var(--secondary-color); color: var(--text-light); padding: 4px 10px; font-size: 0.7rem; font-weight: 700;">RANK 2</span>
+                    </div>
+
+                    <p style="margin-top: 12px; line-height: 1.6;">
+                        Representatives operate as the backbone of City Council, ensuring follow-through on all projects and acting
+                        as a primary contact for all civilians and external personnel. They bridge the gap between council leadership
+                        and the community, managing day-to-day operations and citizen inquiries.
+                    </p>
+
+                    <div style="margin-top: 15px; padding: 12px; background: var(--bg-dark); border-left: 3px solid var(--text-dark);">
+                        <p style="margin: 0; font-size: 0.85rem;">
+                            <strong>Key Responsibilities:</strong> Project management, civilian liaison, external communications, operational execution
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Rank 3: Clerk -->
+                <div class="feature-card" style="margin-top: 25px; border-left: 4px solid var(--border-color);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                        <h3 style="margin: 0; color: var(--text-light); text-transform: uppercase; letter-spacing: 1px;">Clerk</h3>
+                        <span style="background: var(--bg-dark); color: var(--text-light); padding: 4px 10px; font-size: 0.7rem; font-weight: 700; border: 1px solid var(--border-color);">RANK 3</span>
+                    </div>
+
+                    <p style="margin-top: 12px; line-height: 1.6;">
+                        Clerks assist the representatives to the best of their abilities, formulating initiatives of their own and
+                        striving for ongoing improvement where applicable. They're advocated tasks from their superiors and organize
+                        cases for their supervisors to complete formally, providing essential administrative and operational support.
+                    </p>
+
+                    <div style="margin-top: 15px; padding: 12px; background: var(--bg-dark); border-left: 3px solid var(--border-color);">
+                        <p style="margin: 0; font-size: 0.85rem;">
+                            <strong>Key Responsibilities:</strong> Administrative support, case organization, initiative development, task execution
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Rank 4: Intern -->
+                <div class="feature-card" style="margin-top: 25px; border-left: 4px solid rgba(255, 255, 255, 0.2);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                        <h3 style="margin: 0; color: var(--text-light); text-transform: uppercase; letter-spacing: 1px;">Intern</h3>
+                        <span style="background: transparent; color: var(--text-dark); padding: 4px 10px; font-size: 0.7rem; font-weight: 700; border: 1px solid var(--border-color);">RANK 4</span>
+                    </div>
+
+                    <p style="margin-top: 12px; line-height: 1.6;">
+                        Interns are learner roles and simply do what's asked of them whilst keeping a sharp mind, learning the ins and outs
+                        of City Council. Their main job is ensuring the superiors have everything they request—specifically coffee.
+                        This entry-level position provides valuable experience and insight into municipal governance.
+                    </p>
+
+                    <div style="margin-top: 15px; padding: 12px; background: var(--bg-dark); border-left: 3px solid rgba(255, 255, 255, 0.2);">
+                        <p style="margin: 0; font-size: 0.85rem;">
+                            <strong>Key Responsibilities:</strong> Task execution, coffee runs, learning operations, supporting all ranks
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Chain of Command Visual -->
+                <div style="margin-top: 40px; padding: 25px; background: var(--bg-light); border: 1px solid var(--border-color);">
+                    <h3 style="text-align: center; margin-bottom: 20px; color: var(--accent-color);">Chain of Command</h3>
+                    <div style="text-align: center; font-size: 1.1rem; line-height: 2.5;">
+                        <div style="color: var(--accent-color); font-weight: 700;">⬇️ COUNCILMEN/WOMAN</div>
+                        <div style="color: var(--text-dark);">⬇️ REPRESENTATIVE</div>
+                        <div style="color: var(--text-dark);">⬇️ CLERK</div>
+                        <div style="color: var(--text-dark); opacity: 0.7;">⬇️ INTERN</div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 25px; padding: 20px; background: var(--bg-dark); border: 1px solid var(--border-color); text-align: center;">
+                    <p style="margin: 0; font-size: 0.95rem;">
+                        <strong>Interested in joining our team?</strong> Check out our
+                        <a href="#careers" style="color: var(--accent-color); text-decoration: none; font-weight: 600;">career opportunities</a>
+                        to learn more about available positions.
+                    </p>
+                </div>
             </div>
         </section>
 
@@ -553,7 +741,77 @@
         <section id="careers">
             <div class="content-card">
                 <h2>Job Opportunities & Careers</h2>
-                <p>[Content to be added]</p>
+                <p>
+                    Join the Los Santos City Council team and be part of something bigger. We're looking for dedicated individuals
+                    who are passionate about public service and making a difference in our community.
+                </p>
+
+                <!-- Job Opening: Intern -->
+                <div class="feature-card" style="margin-top: 30px; border-left: 4px solid var(--accent-color);">
+                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 15px;">
+                        <div>
+                            <h3 style="margin: 0; color: var(--accent-color);">Intern Position</h3>
+                            <p style="margin: 5px 0 0 0; font-size: 0.85rem; opacity: 0.8;">Entry Level | Full-Time | Paid Salary</p>
+                        </div>
+                        <span style="background: #00ff00; color: #000000; padding: 5px 12px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Now Hiring</span>
+                    </div>
+
+                    <h4 style="margin-top: 20px; color: var(--text-light);">About the Job</h4>
+                    <p style="margin-top: 10px; line-height: 1.6;">
+                        Los Santos City Council is currently seeking an onboarding of Interns. This role is an entry-level position
+                        which is full-time. Successful applicants will be tasked with assisting their superiors and completing tasks
+                        allocated to them promptly without hesitation.
+                    </p>
+
+                    <div class="highlight-box" style="margin-top: 20px;">
+                        <h4 style="margin: 0 0 10px 0; color: var(--text-light);">📋 Responsibilities</h4>
+                        <ul style="margin: 0; padding-left: 20px;">
+                            <li>Morning coffee runs</li>
+                            <li>Scanning documentation</li>
+                            <li>Stocktake and ensuring supplies are stocked</li>
+                            <li>Driving</li>
+                            <li>Cleaning</li>
+                            <li>Other tasks as allocated by superiors</li>
+                        </ul>
+                    </div>
+
+                    <div style="margin-top: 20px; padding: 15px; background: var(--bg-light); border: 1px solid var(--accent-color);">
+                        <h4 style="margin: 0 0 10px 0; color: var(--accent-color);">💰 Compensation</h4>
+                        <p style="margin: 0;">
+                            Interns are paid salary and will see a generous paycheck per pay cycle.
+                        </p>
+                    </div>
+
+                    <h4 style="margin-top: 25px; color: var(--text-light);">✅ Requirements</h4>
+                    <p style="margin-top: 10px;">Successful applicants will be:</p>
+                    <ul style="margin-top: 10px; padding-left: 20px;">
+                        <li>Team players</li>
+                        <li>Punctual</li>
+                        <li>Hold a current driver's license</li>
+                        <li>Have a keen interest in learning a new field</li>
+                        <li>Strong attention to detail</li>
+                        <li>Work well under pressure</li>
+                    </ul>
+
+                    <div style="margin-top: 25px; padding: 20px; background: var(--bg-dark); border: 2px solid var(--accent-color); text-align: center;">
+                        <h4 style="margin: 0 0 15px 0; color: var(--accent-color);">Ready to Apply?</h4>
+                        <p style="margin: 0 0 15px 0;">
+                            If this is something that interests you, please reach out via the information provided in the
+                            <a href="#contact" style="color: var(--accent-color); text-decoration: none; font-weight: 600;">Contact Us</a> section.
+                        </p>
+                        <a href="https://discord.gg/X8mVUMjRNb" target="_blank" style="color: var(--primary-color); background: var(--accent-color); text-decoration: none; font-weight: 700; font-size: 1rem; display: inline-block; padding: 12px 30px; transition: all 0.2s ease;">
+                            📱 Apply via Discord
+                        </a>
+                    </div>
+                </div>
+
+                <div style="margin-top: 30px; padding: 20px; background: var(--bg-light); border: 1px solid var(--border-color);">
+                    <h4 style="margin: 0 0 10px 0; color: var(--text-light);">Don't See a Position That Fits?</h4>
+                    <p style="margin: 0; font-size: 0.9rem;">
+                        We're always looking for talented individuals to join our team. Feel free to reach out and introduce yourself—
+                        opportunities may arise in the future for Representatives, Clerks, and other positions.
+                    </p>
+                </div>
             </div>
         </section>
 
@@ -582,15 +840,15 @@
 
                 <h3>Council Leadership</h3>
                 <p>
-                    Our Senators are dedicated to serving Los Santos with integrity and professionalism.
+                    Our Councilmen/Women are dedicated to serving Los Santos with integrity and professionalism.
                     Feel free to reach out directly for any council-related matters.
                 </p>
 
                 <div class="grid-2">
                     <div class="feature-card">
-                        <h4>👤 Senator Tony Yugoslav</h4>
+                        <h4>👤 Councilman Tony Yugoslav</h4>
                         <p style="margin-top: 10px;">
-                            <strong>Position:</strong> Senator<br>
+                            <strong>Position:</strong> Councilman<br>
                             <strong>Discord:</strong> <span style="color: var(--accent-color); font-weight: 600;">beatroot97</span>
                         </p>
                         <p style="margin-top: 15px; font-size: 0.9rem; color: rgba(255, 255, 255, 0.7);">
@@ -598,9 +856,9 @@
                         </p>
                     </div>
                     <div class="feature-card">
-                        <h4>👤 Senator Roco Kesfataris</h4>
+                        <h4>👤 Councilman Roco Kesfataris</h4>
                         <p style="margin-top: 10px;">
-                            <strong>Position:</strong> Senator<br>
+                            <strong>Position:</strong> Councilman<br>
                             <strong>Discord:</strong> <span style="color: var(--accent-color); font-weight: 600;">feakz_</span>
                         </p>
                         <p style="margin-top: 15px; font-size: 0.9rem; color: rgba(255, 255, 255, 0.7);">
@@ -709,32 +967,58 @@
             }
         }
 
-        // Animate Statistics Counter
-        function animateStats() {
-            const stats = document.querySelectorAll('.stat-number');
-            stats.forEach(stat => {
-                const target = parseInt(stat.getAttribute('data-target'));
-                const duration = 2000; // 2 seconds
-                const increment = target / (duration / 16); // 60fps
-                let current = 0;
+        // Update dynamic stats from other sections
+        function updateDynamicStats() {
+            // Count council members from hierarchy section
+            const hierarchySection = document.getElementById('hierarchy');
+            const councilMemberElements = hierarchySection.querySelectorAll('.member-item, .hierarchy-member, li');
+            const councilMembersCount = councilMemberElements.length;
 
-                const updateCounter = () => {
-                    current += increment;
-                    if (current < target) {
-                        stat.textContent = Math.floor(current);
-                        requestAnimationFrame(updateCounter);
-                    } else {
-                        stat.textContent = target;
-                    }
-                };
+            // Count active projects from projects section
+            const projectsSection = document.getElementById('projects');
+            const projectElements = projectsSection.querySelectorAll('.project-item, .feature-card, .accordion-item');
+            const activeProjectsCount = projectElements.length;
 
-                stat.textContent = '0';
-                updateCounter();
-            });
+            // Animate the counts
+            animateCounter('council-members-count', councilMembersCount);
+            animateCounter('active-projects-count', activeProjectsCount);
         }
 
-        // Initialize
-        animateStats();
+        // Animate a single counter
+        function animateCounter(elementId, target) {
+            const element = document.getElementById(elementId);
+            if (!element) return;
+
+            const duration = 2000; // 2 seconds
+            const increment = target / (duration / 16); // 60fps
+            let current = 0;
+
+            const updateCounter = () => {
+                current += increment;
+                if (current < target) {
+                    element.textContent = Math.floor(current);
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    element.textContent = target;
+                }
+            };
+
+            element.textContent = '0';
+            updateCounter();
+        }
+
+        // Initialize - update stats when page loads and when sections change
+        document.addEventListener('DOMContentLoaded', function() {
+            updateDynamicStats();
+
+            // Re-count when navigating to sections (in case content was added dynamically)
+            const navLinks = document.querySelectorAll('.tab-btn');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    setTimeout(updateDynamicStats, 100);
+                });
+            });
+        });
     </script>
 </body>
 </html>
