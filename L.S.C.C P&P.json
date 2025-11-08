@@ -1,0 +1,39 @@
+{
+  "version": 7,
+  "backups": [
+    {
+      "name": "L.S.C.C P&P",
+      "messages": [
+        {
+          "data": {
+            "content": null,
+            "embeds": [
+              {
+                "description": "# **DRESS CODE** \n**--------------------------------**\n\n**OFFICE ATTIRE**:\n\nAll Male council workers are to wear a Shirt, Tie, Dress shoes, & Dress pants when at work.\n\nAll Female council workers are to wear a Shirt, Dress (Shorter the better, REEOOWWW), High Heels, \n\nEither sex or pronoun is free to wear a blowse overtop.\n \n**FIELD ATTIRE**:\n\nAforementioned dress code applies however the following PPE is additionally required. High-vis, Hard Hat, Steel toed shoe, & Safety glasses are to be worn.\n‎ ‎ \n‎",
+                "color": 0
+              },
+              {
+                "description": "# **COMPANY VEHICLE** \n**----------------------------------------------------**\n\n**CITY VEHICLE**:\n\nOBEY TAILGATER-S is to be driven whilst conducting business in City.\n\n**COUNTY VEHICLE**:\n\nCASTINGATOR is to be driven whilst conducting business outside the city.\n‎",
+                "color": 0
+              },
+              {
+                "description": "# **COUNCIL EDICET** \n**----------------------------------------------------**\n\n**PROFESSIONALISIM**:\n\nAll Councilmen & women, are expected to act professional when conducting themselves in city. Failure to comply can result in immediate dismissal. \n\n**RESPECT**:\n\nAll Councilmen & women are to treat themselves and others with respect. In our line of work were going to run into conflict and it's important that we respect civilians as to not upset them or cause issues.\n\n**HONESTY**:\n\nAll members of city council have been sworn in by law and need to uphold honesty and integrity at all times.\n‎ \n‎",
+                "color": 0
+              },
+              {
+                "description": "# **SWORN IN** \n**----------------------------------------------------**\n\n** I, ___________, do swear (or solemnly affirm) that I will honour, uphold and preserve the Constitution of Los Santos and the law, that I will faithfully, impartially and to the best of my ability discharge my duties as and do right to all manner of people without fear or favour, affection or ill-will.\n\nSo help me John Citizen!",
+                "color": 0
+              }
+            ]
+          },
+          "reference": ""
+        }
+      ],
+      "targets": [
+        {
+          "url": "https://discord.com/api/webhooks/1429111909369516139/EAwRlDPXl1DFFz5ZY7NAVmyWTmvyawa47TczzkPslVouAJG9AtW9GWxhPoCpNk7KQZit"
+        }
+      ]
+    }
+  ]
+}
